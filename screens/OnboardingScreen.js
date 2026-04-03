@@ -1,13 +1,16 @@
 import { useState, useContext } from 'react';
-import { Image, View, StyleSheet, Text, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, StyleSheet, } from 'react-native';
 import { AppDataContext } from '../context/AppDataContext';
 import { validateEmailWithoutLenght, validateNameWithoutLenght } from '../utils/Validations';
 import { COLORS } from '../utils/Colors';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 import { useAppNavigation } from '../hooks/useNavigation';
 import { SCREENS } from './Screens';
+import BasePage from '../components/BasePage';
+import HeroBanner from '../components/HeroBanner';
 
 const OnboardingScreen = () => {
   const { updateAppData, APP_DATA_KEYS } = useContext(AppDataContext);
@@ -42,51 +45,63 @@ const OnboardingScreen = () => {
     goToScreen(SCREENS.Home);
   };
 
+  const isFormValid = () => {
+    const firstNameError = validateNameWithoutLenght(firstName, false);
+    const emailError = validateEmailWithoutLenght(email, false);
+
+    return !firstNameError && !emailError;
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.LogoContainer}>
-        <Image
-          source={require('../assets/logo.jpg')}
-          style={styles.LogoImage}
-        />
-      </View>
+    <BasePage
+      scrollable={false}
+      HeaderComponent={Header}
+      headerProps={{
+        showBackButton: false,
+        showProfile: false
+      }}
+      bodyChildren={
+        <View style={styles.container}>
 
-      <View style={styles.BodyContainer}>
-        <Text style={styles.Title}>Let us get to know you!</Text>
-
-        <View style={styles.FieldsContainer}>
-          <InputField
-            label="First Name"
-            placeholder="Type Your First Name"
-            value={firstName}
-            onChangeText={(text) => {
-              setFirstName(text);
-              setFormErrors({ ...formErrors, firstName: '' });
-            }}
-            error={formErrors.firstName}
+          <HeroBanner
+            imageSource={require('../assets/little-lemon-logo.png')}
           />
 
-          <InputField
-            label="Email"
-            placeholder="Type Your Email"
-            value={email}
-            keyboardType="email-address"
-            onChangeText={(text) => {
-              setEmail(text);
-              setFormErrors({ ...formErrors, email: '' });
-            }}
-            error={formErrors.email}
-          />
+          <View style={styles.FieldsContainer}>
+            <InputField
+              label="First Name"
+              placeholder="Type Your First Name"
+              value={firstName}
+              onChangeText={(text) => {
+                setFirstName(text);
+                setFormErrors({ ...formErrors, firstName: '' });
+              }}
+              error={formErrors.firstName}
+            />
+
+            <InputField
+              label="Email"
+              placeholder="Type Your Email"
+              value={email}
+              keyboardType="email-address"
+              onChangeText={(text) => {
+                setEmail(text);
+                setFormErrors({ ...formErrors, email: '' });
+              }}
+              error={formErrors.email}
+            />
+          </View>
+
+          <Button title="Next" onPress={handleSignIn} disabled={!isFormValid()} />
         </View>
-
-        <Button title="Next" onPress={handleSignIn} />
-      </View>
-    </SafeAreaView>
+      }
+      FooterComponent={() => <Footer buttons={[]} />}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.secondaryContainer },
+  container: { flex: 1 },
   LogoContainer: {
     width: '100%',
     alignItems: 'center',
@@ -96,7 +111,7 @@ const styles = StyleSheet.create({
   LogoImage: { width: '80%', resizeMode: 'contain' },
   BodyContainer: { flex: 1, paddingHorizontal: 20, paddingTop: 40 },
   Title: { fontSize: 24, textAlign: 'center', marginBottom: 30, color: '#666' },
-  FieldsContainer: { marginBottom: 20 },
+  FieldsContainer: { marginVertical: 30 },
 });
 
 export default OnboardingScreen;

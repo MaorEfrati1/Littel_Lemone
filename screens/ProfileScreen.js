@@ -6,6 +6,7 @@ import BasePage from '../components/BasePage';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import CheckboxGroup from '../components/CheckboxGroup';
+import AvatarEditor from '../components/AvatarEditor';
 import Button from '../components/Button';
 import InputField from '../components/InputField';
 import { validateName, validateEmail, validatePhoneNumber } from '../utils/Validations';
@@ -104,8 +105,10 @@ const ProfileScreen = () => {
                 onPressProfile: null,
             }}
             bodyChildren={
-                <View>
+                <View style={styles.card}>
                     <Text style={styles.TitleText}>Personal Information</Text>
+
+                    <AvatarEditor />
 
                     <InputField
                         label="First Name"
@@ -189,6 +192,18 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 16,
+        padding: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 8,
+        elevation: 3,
+        marginHorizontal: 4,
+        marginVertical: 8,
+    },
     TitleText: {
         fontWeight: 'bold',
         fontSize: 20,

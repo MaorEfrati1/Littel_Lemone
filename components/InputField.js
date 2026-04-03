@@ -57,10 +57,10 @@ export default InputField;
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 16,
+        marginVertical: 10,
     },
     label: {
-        marginBottom: 6,
+        marginVertical: 6,
         fontWeight: '600',
     },
     input: {

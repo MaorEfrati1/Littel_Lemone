@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { View, Text, Image, TouchableOpacity, Alert, StyleSheet, ActionSheetIOS, Platform, Modal, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { AppDataContext } from '../context/AppDataContext';
 
-const ProfileAvatar = ({ firstName, lastName, size = 40, onPress, style }) => {
+const ProfileAvatar = forwardRef(({ firstName, lastName, size = 40, onPress, style }, ref) => {
     const { appData, updateAppData, APP_DATA_KEYS } = useContext(AppDataContext);
     const [imageUri, setImageUri] = useState(appData.userDetails.image);
     const [modalVisible, setModalVisible] = useState(false);
@@ -132,6 +132,11 @@ const ProfileAvatar = ({ firstName, lastName, size = 40, onPress, style }) => {
         }
     };
 
+    useImperativeHandle(ref, () => ({
+        showPicker,
+        removeImage,
+    }));
+
     const handlePress = () => {
         if (isEditable) {
             showPicker();
@@ -211,7 +216,9 @@ const ProfileAvatar = ({ firstName, lastName, size = 40, onPress, style }) => {
             )}
         </>
     );
-};
+});
+
+ProfileAvatar.displayName = 'ProfileAvatar';
 
 const styles = StyleSheet.create({
     touchable: {

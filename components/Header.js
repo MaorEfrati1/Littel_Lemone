@@ -5,6 +5,7 @@ import ProfileAvatar from './ProfileAvatar';
 
 const Header = ({
     showBackButton = false,
+    showProfile = true,
     onPressBack,
     onPressProfile,
     firstName,
@@ -29,12 +30,14 @@ const Header = ({
             </View>
 
             <View style={styles.side}>
-                <ProfileAvatar
-                    firstName={firstName}
-                    lastName={lastName}
-                    size={40}
-                    onPress={onPressProfile} // you can detect screen context here
-                />
+                {showProfile && (
+                    <ProfileAvatar
+                        firstName={firstName}
+                        lastName={lastName}
+                        size={40}
+                        onPress={onPressProfile}
+                    />
+                )}
             </View>
         </View>
     );

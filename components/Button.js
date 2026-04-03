@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     disabled: {
-        backgroundColor: COLORS.disabled,
+        // backgroundColor: COLORS.disabled,
         opacity: 0.6,
     },
     text: {
