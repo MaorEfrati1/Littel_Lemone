@@ -7,7 +7,20 @@ const BasePage = ({
     headerProps = {},
     bodyChildren,
     FooterComponent,
+    scrollable = true,
 }) => {
+    const BodyWrapper = scrollable ? ScrollView : View;
+
+    const bodyProps = scrollable
+        ? {
+            style: styles.scroll,
+            contentContainerStyle: styles.scrollContent,
+            keyboardShouldPersistTaps: 'handled',
+        }
+        : {
+            style: [styles.scroll, styles.scrollContent],
+        };
+
     return (
         <SafeAreaView style={styles.container}>
 
@@ -17,13 +30,9 @@ const BasePage = ({
                 </View>
             )}
 
-            <ScrollView
-                style={styles.scroll}
-                contentContainerStyle={styles.scrollContent}
-                keyboardShouldPersistTaps="handled"
-            >
+            <BodyWrapper {...bodyProps}>
                 {bodyChildren ?? null}
-            </ScrollView>
+            </BodyWrapper>
 
             {FooterComponent && (
                 <View style={styles.footer}>
