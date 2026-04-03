@@ -2,19 +2,19 @@ import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Alert, StyleSheet, ActionSheetIOS, Platform, Modal, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import { AppStateContext } from '../context/AppStateContext';
+import { AppDataContext } from '../context/AppDataContext';
 
 const ProfileAvatar = ({ firstName, lastName, size = 40, onPress, style }) => {
-    const { appState, updateAppState, APP_STATE_KEYS } = useContext(AppStateContext);
-    const [imageUri, setImageUri] = useState(appState.userDetails.image);
+    const { appData, updateAppData, APP_DATA_KEYS } = useContext(AppDataContext);
+    const [imageUri, setImageUri] = useState(appData.userDetails.image);
     const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
-        setImageUri(appState.userDetails.image);
-    }, [appState.userDetails.image]);
+        setImageUri(appData.userDetails.image);
+    }, [appData.userDetails.image]);
 
-    const finalFirstName = firstName?.trim() || appState.userDetails.firstName;
-    const finalLastName = lastName?.trim() || appState.userDetails.lastName;
+    const finalFirstName = firstName?.trim() || appData.userDetails.firstName;
+    const finalLastName = lastName?.trim() || appData.userDetails.lastName;
 
     const isEditable = !onPress;
 
@@ -23,8 +23,8 @@ const ProfileAvatar = ({ firstName, lastName, size = 40, onPress, style }) => {
         const normalized = uri.startsWith('file://') ? uri : `file://${uri}`;
         setImageUri(normalized);
 
-        updateAppState(APP_STATE_KEYS.userDetails, {
-            ...(appState.userDetails || {}),
+        updateAppData(APP_DATA_KEYS.userDetails, {
+            ...(appData.userDetails || {}),
             image: normalized,
         });
     };
@@ -99,8 +99,8 @@ const ProfileAvatar = ({ firstName, lastName, size = 40, onPress, style }) => {
         setModalVisible(false);
         setImageUri(null);
 
-        updateAppState(APP_STATE_KEYS.userDetails, {
-            ...(appState.userDetails || {}),
+        updateAppData(APP_DATA_KEYS.userDetails, {
+            ...(appData.userDetails || {}),
             image: null,
         });
     };

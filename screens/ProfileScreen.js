@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { AppStateContext } from '../context/AppStateContext';
+import { AppDataContext } from '../context/AppDataContext';
 import { useAppNavigation } from '../hooks/useNavigation';
 import BasePage from '../components/BasePage';
 import Footer from '../components/Footer';
@@ -29,15 +29,15 @@ const ProfileScreen = () => {
         newsletter: 'Newsletter',
     };
 
-    const { appState, updateAppState, APP_STATE_KEYS, clearAppState } = useContext(AppStateContext);
+    const { appData, updateAppData, APP_DATA_KEYS, clearAppData } = useContext(AppDataContext);
 
-    const [firstName, setFirstName] = useState(appState.userDetails.firstName);
-    const [lastName, setLastName] = useState(appState.userDetails.lastName);
-    const [email, setEmail] = useState(appState.userDetails.email);
-    const [phoneNumber, setPhoneNumber] = useState(appState.userDetails.phone);
+    const [firstName, setFirstName] = useState(appData.userDetails.firstName);
+    const [lastName, setLastName] = useState(appData.userDetails.lastName);
+    const [email, setEmail] = useState(appData.userDetails.email);
+    const [phoneNumber, setPhoneNumber] = useState(appData.userDetails.phone);
     const [formErrors, setFormErrors] = useState({});
     const [emailNotifications, setEmailNotifications] = useState(
-        appState.userDetails.emailNotifications || {
+        appData.userDetails.emailNotifications || {
             orederStatuses: false,
             passwordChanges: false,
             specialOffers: false,
@@ -67,8 +67,8 @@ const ProfileScreen = () => {
             return;
         }
 
-        updateAppState(APP_STATE_KEYS.userDetails, {
-            ...appState.userDetails,
+        updateAppData(APP_DATA_KEYS.userDetails, {
+            ...appData.userDetails,
             firstName,
             lastName,
             email,
@@ -80,16 +80,16 @@ const ProfileScreen = () => {
     };
 
     const handleDiscardChanges = () => {
-        setFirstName(appState.userDetails.firstName);
-        setLastName(appState.userDetails.lastName);
-        setEmail(appState.userDetails.email);
-        setPhoneNumber(appState.userDetails.phone);
-        setEmailNotifications(appState.userDetails.emailNotifications || {});
+        setFirstName(appData.userDetails.firstName);
+        setLastName(appData.userDetails.lastName);
+        setEmail(appData.userDetails.email);
+        setPhoneNumber(appData.userDetails.phone);
+        setEmailNotifications(appData.userDetails.emailNotifications || {});
         setFormErrors({});
     };
 
     const handleLogout = () => {
-        clearAppState();
+        clearAppData();
         goToScreen(SCREENS.Onboarding)
     };
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const APP_STATE_STORAGE_KEY = 'AppState';
+const APP_DATA_STORAGE_KEY = 'AppData';
 
-export const APP_STATE_KEYS = {
+export const APP_DATA_KEYS = {
     isOnboardingCompleted: 'isOnboardingCompleted',
     userDetails: 'userDetails',
 };
@@ -25,19 +25,19 @@ const defaultState = {
     },
 };
 
-export function useAppState() {
+export function useAppData() {
     const [isLoading, setIsLoading] = useState(true);
-    const [appState, setAppState] = useState(defaultState);
+    const [appData, setAppData] = useState(defaultState);
 
     useEffect(() => {
         const loadState = async () => {
             try {
-                const json = await AsyncStorage.getItem(APP_STATE_STORAGE_KEY);
+                const json = await AsyncStorage.getItem(APP_DATA_STORAGE_KEY);
                 if (json) {
-                    setAppState(JSON.parse(json));
+                    setAppData(JSON.parse(json));
                 }
             } catch (e) {
-                console.error('Failed to load appState :', e);
+                console.error('Failed to load appData :', e);
             }
             finally {
                 setIsLoading(false);
@@ -50,31 +50,31 @@ export function useAppState() {
         const saveState = async () => {
             try {
                 if (isLoading) return;
-                await AsyncStorage.setItem(APP_STATE_STORAGE_KEY, JSON.stringify(appState));
+                await AsyncStorage.setItem(APP_DATA_STORAGE_KEY, JSON.stringify(appData));
 
             } catch (e) {
-                console.error('Failed to save appState :', e);
+                console.error('Failed to save appData :', e);
             }
         };
         saveState();
-    }, [appState]);
+    }, [appData]);
 
-    const updateAppState = useCallback((key, value) => {
-        setAppState(prev => ({
+    const updateAppData = useCallback((key, value) => {
+        setAppData(prev => ({
             ...prev,
             [key]: value
         }));
     }, []);
 
-    const clearAppState = useCallback(async () => {
+    const clearAppData = useCallback(async () => {
         try {
 
-            await AsyncStorage.removeItem(APP_STATE_STORAGE_KEY);
-            setAppState(defaultState);
+            await AsyncStorage.removeItem(APP_DATA_STORAGE_KEY);
+            setAppData(defaultState);
         } catch (e) {
-            console.error('Failed to clear appState :', e);
+            console.error('Failed to clear appData :', e);
         }
     }, []);
 
-    return { appState, updateAppState, setIsLoading, clearAppState, isLoading, APP_STATE_KEYS };
+    return { appData, updateAppData, setIsLoading, clearAppData, isLoading, APP_DATA_KEYS };
 }

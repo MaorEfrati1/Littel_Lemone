@@ -1,9 +1,9 @@
 import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
-import { useAppState } from '../hooks/useAppState';
+import { useAppData } from '../hooks/useAppData';
 import { COLORS } from '../utils/Colors';
 
 const LoadingScreen = () => {
-    const { isLoading } = useAppState();
+    const { isLoading } = useAppData();
 
 
     return (

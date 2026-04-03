@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Image, View, StyleSheet, Text, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AppStateContext } from '../context/AppStateContext';
+import { AppDataContext } from '../context/AppDataContext';
 import { validateEmailWithoutLenght, validateNameWithoutLenght } from '../utils/Validations';
 import { COLORS } from '../utils/Colors';
 import InputField from '../components/InputField';
@@ -10,7 +10,7 @@ import { useAppNavigation } from '../hooks/useNavigation';
 import { SCREENS } from './Screens';
 
 const OnboardingScreen = () => {
-  const { updateAppState, APP_STATE_KEYS } = useContext(AppStateContext);
+  const { updateAppData, APP_DATA_KEYS } = useContext(AppDataContext);
   const { goToScreen } = useAppNavigation();
 
   const [firstName, setFirstName] = useState('');
@@ -33,8 +33,8 @@ const OnboardingScreen = () => {
     }
 
     // Save user details
-    updateAppState(APP_STATE_KEYS.isOnboardingCompleted, true);
-    updateAppState(APP_STATE_KEYS.userDetails, {
+    updateAppData(APP_DATA_KEYS.isOnboardingCompleted, true);
+    updateAppData(APP_DATA_KEYS.userDetails, {
       firstName,
       email,
     });

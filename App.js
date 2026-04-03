@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { I18nManager, } from 'react-native';
 import RootNavigator from "./navigators/RootNavigator";
-import { AppStateProvider } from './context/AppStateContext';
+import { AppDataProvider } from './context/AppDataContext';
 import LoadingScreen from './screens/LoadingScreen';
 
 export default function App() {
@@ -27,10 +27,10 @@ export default function App() {
   }
 
   return (
-    <AppStateProvider>
+    <AppDataProvider>
       <NavigationContainer>
         <RootNavigator />
       </NavigationContainer>
-    </AppStateProvider>
+    </AppDataProvider>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { AppStateContext } from "../context/AppStateContext";
+import { AppDataContext } from "../context/AppDataContext";
 import OnboardingScreen from "../screens/OnboardingScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import LoadingScreen from "../screens/LoadingScreen";
@@ -10,7 +10,7 @@ import { SCREENS } from '../screens/Screens';
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
-    const { appState, isLoading } = useContext(AppStateContext);
+    const { appData, isLoading } = useContext(AppDataContext);
 
     if (isLoading) {
         return <LoadingScreen />;
@@ -19,7 +19,7 @@ const RootNavigator = () => {
     return (
         <Stack.Navigator
             initialRouteName={
-                appState.isOnboardingCompleted
+                appData.isOnboardingCompleted
                     ? SCREENS.Home
                     : SCREENS.Onboarding
             }
