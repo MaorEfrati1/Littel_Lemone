@@ -8,6 +8,10 @@ export function useAppNavigation() {
         navigation.navigate(screenName, params);
     };
 
+    const replaceScreen = (screenName, params) => {
+        navigation.replace(screenName, params);
+    };
+
     const goBack = () => {
         if (navigation.canGoBack()) {
             navigation.goBack();
@@ -16,5 +20,5 @@ export function useAppNavigation() {
         }
     };
 
-    return { goToScreen, goBack };
+    return { goToScreen, goBack, replaceScreen };
 }

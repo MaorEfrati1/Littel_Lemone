@@ -14,7 +14,7 @@ import HeroBanner from '../components/HeroBanner';
 
 const OnboardingScreen = () => {
   const { updateAppData, APP_DATA_KEYS } = useContext(AppDataContext);
-  const { goToScreen } = useAppNavigation();
+  const { replaceScreen } = useAppNavigation();
 
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
@@ -42,7 +42,7 @@ const OnboardingScreen = () => {
       email,
     });
 
-    goToScreen(SCREENS.Home);
+    replaceScreen(SCREENS.Home);
   };
 
   const isFormValid = () => {
