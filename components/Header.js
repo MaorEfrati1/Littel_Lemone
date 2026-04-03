@@ -1,23 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { COLORS } from '../utils/Colors';
+import ProfileAvatar from './ProfileAvatar';
 
 const Header = ({
     showBackButton = false,
     onPressBack,
     onPressProfile,
-    profileImage,
+    firstName,
+    lastName,
 }) => {
     return (
         <View style={styles.container}>
-
             <View style={styles.side}>
-                {profileImage && (
-                    <TouchableOpacity onPress={onPressProfile}>
-                        <Image
-                            source={{ uri: profileImage }}
-                            style={styles.profile}
-                        />
+                {showBackButton && (
+                    <TouchableOpacity style={styles.backBtn} onPress={onPressBack}>
+                        <Text style={styles.arrow}>←</Text>
                     </TouchableOpacity>
                 )}
             </View>
@@ -31,13 +29,13 @@ const Header = ({
             </View>
 
             <View style={styles.side}>
-                {showBackButton && (
-                    <TouchableOpacity style={styles.backBtn} onPress={onPressBack}>
-                        <Text style={styles.arrow}>←</Text>
-                    </TouchableOpacity>
-                )}
+                <ProfileAvatar
+                    firstName={firstName}
+                    lastName={lastName}
+                    size={40}
+                    onPress={onPressProfile} // you can detect screen context here
+                />
             </View>
-
         </View>
     );
 };
@@ -71,12 +69,6 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
 
-    profile: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-    },
-
     backBtn: {
         width: 40,
         height: 40,
@@ -84,7 +76,6 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.primaryButton,
         alignItems: 'center',
         justifyContent: 'center',
-
     },
 
     arrow: {
@@ -92,6 +83,6 @@ const styles = StyleSheet.create({
         color: COLORS.text,
         textAlign: 'center',
         lineHeight: 28,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
 });

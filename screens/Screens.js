@@ -1,5 +1,5 @@
 export const SCREENS = {
     Home: 'Home',
-    Onboarding: 'Onboarding ',
+    Onboarding: 'Onboarding',
     Profile: 'Profile',
 };
