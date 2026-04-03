@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useContext } from "react";
+import React, { useContext } from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppStateContext } from "../context/AppStateContext";
 import OnboardingScreen from "../screens/OnboardingScreen";
