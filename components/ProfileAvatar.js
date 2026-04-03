@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     initialsContainer: {
         width: '100%',
         height: '100%',
-        backgroundColor: '#49dbe6',
+        backgroundColor: '#81c9cf',
         justifyContent: 'center',
         alignItems: 'center',
     },
