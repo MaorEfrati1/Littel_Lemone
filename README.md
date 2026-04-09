@@ -1,10 +1,6 @@
 <div align="center">
 🍋 Little Lemon
 A React Native food ordering app — Meta React Native Specialization Capstone Project
-Show Image
-Show Image
-Show Image
-Show Image
 </div>
 
 📖 About the Project
@@ -13,7 +9,7 @@ This project was built as the capstone project for the Meta React Native Special
 
 📱 Screenshots
 <div align="center">
-OnboardingMenu & SearchProfile<img src="https://github.com/user-attachments/profile.png" width="200"/><img src="https://github.com/user-attachments/onboarding.png" width="200"/><img src="https://github.com/user-attachments/menu.png" width="200"/>Welcome & registration screenBrowse & filter menu itemsManage personal information
+OnboardingMenu & SearchProfile<img src="![Profile](profile.png)" width="200"/><img src="https://github.com/user-attachments/onboarding.png" width="200"/><img src="https://github.com/user-attachments/menu.png" width="200"/>Welcome & registration screenBrowse & filter menu itemsManage personal information
 </div>
 
 ✨ Features
